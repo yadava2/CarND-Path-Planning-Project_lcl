@@ -1,18 +1,18 @@
 # CarND-Path-Planning-Project
 Self-Driving Car Engineer Nanodegree Program
+
+![start](images/driving.png)
    
-### Simulator.
-You can download the Term3 Simulator which contains the Path Planning Project from the [releases tab (https://github.com/udacity/self-driving-car-sim/releases/tag/T3_v1.2).  
+## Problem Overview
+The goals of the project are as follows
+1. The Ego car should safely navigate around a virtual highway with other traffic that is driving +-10 MPH of the 50 MPH speed limit. 
+2. The car's localization and sensor fusion data as well as a sparse map list of waypoints around the highway is provided. The car should try to go as close as possible to the 50 MPH speed limit, which means passing slower traffic when possible, while the other cars will try to change lanes too. 
+3. The car should avoid hitting other cars at all cost as well as driving inside of the marked road lanes at all times, unless going from one lane to another. 
+4. The car should be able to make one complete loop around the 6946m highway. Since the car is trying to go 50 MPH, it should take a little over 5 minutes to complete 1 loop. 
+5. The car should not experience total acceleration over 10 m/s^2 and jerk that is greater than 10 m/s^3.
+Thus, we need to implement a path planning algorithms to drive a car on a highway on a simulator provided by Udacity.
 
-To run the simulator on Mac/Linux, first make the binary file executable with the following command:
-```shell
-sudo chmod u+x {simulator_file_name}
-```
-
-### Goals
-In this project your goal is to safely navigate around a virtual highway with other traffic that is driving +-10 MPH of the 50 MPH speed limit. You will be provided the car's localization and sensor fusion data, there is also a sparse map list of waypoints around the highway. The car should try to go as close as possible to the 50 MPH speed limit, which means passing slower traffic when possible, note that other cars will try to change lanes too. The car should avoid hitting other cars at all cost as well as driving inside of the marked road lanes at all times, unless going from one lane to another. The car should be able to make one complete loop around the 6946m highway. Since the car is trying to go 50 MPH, it should take a little over 5 minutes to complete 1 loop. Also the car should not experience total acceleration over 10 m/s^2 and jerk that is greater than 10 m/s^3.
-
-#### The map of the highway is in data/highway_map.txt
+## The map of the highway (data/highway_map.txt)
 Each waypoint in the list contains  [x,y,s,dx,dy] values. x and y are the waypoint's map coordinate position, the s value is the distance along the road to get to that waypoint in meters, the dx and dy values define the unit normal vector pointing outward of the highway loop.
 
 The highway's waypoints loop around so the frenet s value, distance along the road, goes from 0 to 6945.554.
@@ -24,7 +24,7 @@ The highway's waypoints loop around so the frenet s value, distance along the ro
 3. Compile: `cmake .. && make`
 4. Run it: `./path_planning`.
 
-Here is the data provided from the Simulator to the C++ Program
+## Data provided from the Simulator.
 
 #### Main car's localization Data (No Noise)
 
@@ -65,11 +65,7 @@ the path has processed since last time.
 
 2. There will be some latency between the simulator running and the path planner returning a path, with optimized code usually its not very long maybe just 1-3 time steps. During this delay the simulator will continue using points that it was last given, because of this its a good idea to store the last points you have used so you can have a smooth transition. previous_path_x, and previous_path_y can be helpful for this transition since they show the last points given to the simulator controller with the processed points already removed. You would either return a path that extends this previous path or make sure to create a new path that has a smooth transition with this last path.
 
-## Tips
-
-A really helpful resource for doing this project and creating smooth trajectories was using http://kluge.in-chemnitz.de/opensource/spline/, the spline function is in a single hearder file is really easy to use.
-
----
+--
 
 ## Dependencies
 
@@ -91,55 +87,94 @@ A really helpful resource for doing this project and creating smooth trajectorie
     cd uWebSockets
     git checkout e94b6e1
     ```
-
-## Editor Settings
-
-We've purposefully kept editor configuration files out of this repo in order to
-keep it as simple and environment agnostic as possible. However, we recommend
-using the following settings:
-
-* indent using spaces
-* set tab width to 2 spaces (keeps the matrices in source code aligned)
-
-## Code Style
-
-Please (do your best to) stick to [Google's C++ style guide](https://google.github.io/styleguide/cppguide.html).
-
-## Project Instructions and Rubric
-
-Note: regardless of the changes you make, your project must be buildable using
-cmake and make!
+## Project Specification
 
 
-## Call for IDE Profiles Pull Requests
+##Compilation
 
-Help your fellow students!
+#### The code compiles correctly.
+	
+##### Code compile without errors with cmake and make.
 
-We decided to create Makefiles with cmake to keep this project as platform
-agnostic as possible. Similarly, we omitted IDE profiles in order to ensure
-that students don't feel pressured to use one IDE or another.
+The header file Spline.h is added without any other changes in the cmake configuration and the code compiles without any error.
 
-However! I'd love to help people get up and running with their IDEs of choice.
-If you've created a profile for an IDE that you think other students would
-appreciate, we'd love to have you add the requisite profile files and
-instructions to ide_profiles/. For example if you wanted to add a VS Code
-profile, you'd add:
 
-* /ide_profiles/vscode/.vscode
-* /ide_profiles/vscode/README.md
+## Valid Trajectories
 
-The README should explain what the profile does, how to take advantage of it,
-and how to install it.
+#### The car is able to drive at least 4.32 miles without incident.
+	
+The car was run for more then 10 miles without any incident.
 
-Frankly, I've never been involved in a project with multiple IDE profiles
-before. I believe the best way to handle this would be to keep them out of the
-repo root to avoid clutter. My expectation is that most profiles will include
-instructions to copy files to a new location to get picked up by the IDE, but
-that's just a guess.
+![Rubric](images/rubric_achived.png)
 
-One last note here: regardless of the IDE used, every submitted project must
-still be compilable with cmake and make./
+![10miles](images/10miles_2.png)
 
-## How to write a README
-A well written README file can enhance your project and portfolio.  Develop your abilities to create professional README files by completing [this free course](https://www.udacity.com/course/writing-readmes--ud777).
+#### The car drives according to the speed limit.
+	
+The car doesn't drive faster than the speed limit. Also the car isn't driving much slower than speed limit unless obstructed by traffic.
+
+#### Max Acceleration and Jerk are not Exceeded.
+	
+The car does not exceed a total acceleration of 10 m/s^2 and a jerk of 10 m/s^3. Thus there were no warning messages displayed.
+
+#### Car does not have collisions.
+	
+The car does not come into contact with any of the other cars on the road.
+
+#### The car stays in its lane, except for the time between changing lanes.
+	
+The car doesn't spend more than a 3 second length out side the lane lanes during changing lanes, and every other time the car stays inside one of the 3 lanes on the right hand side of the road.
+
+#### The car is able to change lanes
+	
+
+The car is able to smoothly change lanes when it makes sense to do so, such as when behind a slower moving car and an adjacent lane is clear of other traffic.
+
+## Reflection
+
+To start the project the following the steps are followed.
+* The simulator is downloaded.([the simulator could be downloaded here](https://github.com/udacity/self-driving-car-sim/releases/tag/T3_v1.2)).
+
+![simulator](images/simulator.png)
+
+* The project is cloned.([here](https://github.com/udacity/CarND-Path-Planning-Project)).
+
+* The car transmits its location, along with its sensor fusion data, which estimates the location of all the vehicles on the same side of the road.
+
+* The path planner outputs a list of x and y global map coordinates. Each pair of x and y coordinates is a point, and all of the points together form a trajectory. Since initially the there is nothing passed to the next_x,next_y variables (src/main.cpp line 467,468) the car remains unmoved initially.
+
+* The project is now approached by considering the following parts.
+
+### Trajectory Generation [line 344 to line 470](./src/main.cpp#L344)
+
+This part of the code computes the trajectory of the car based on the behaviour planning done. Before implemeting this code the car would not move in the simulator. To start with (as per the project walkthrough) 50 points were generated which made the car move in the simulator. To keep the car in track the XY coordinate is converted to Frenet co-ordinate and the car starts moving.
+
+Now the last two points of the previous trajectory or the car position (lines 370 to 387: if the previous size is almost empty) and three other points (lines 394 to 400 :30m spaced points ahead of the starting refrence) are pushed and used to create a spline. Calculation is done to break up spline points so that we travel at the deired refrence velocity.(lines 431 to 433).
+
+To maintain continuity we start with the previous path points from the last time (lines 423 to 428) and fill up the rest of our path planner and the speed is maintained based on the speed decided by the behaviour planner(lines 439 to 446). 
+
+### Prediction step [line 265 to line 311](./src/main.cpp#L265)  
+
+After working on the trajectory generator this part of the code was developed to use the sensor fusion data available from the simulator. We go through all the cars in the visinity of the ego car and categorise three aspects of the cars.
+ * Car_ahead (if the car is ahead and less the 30m blocking the ego car)
+ * Car_left (if the car to the left is close and left turn shoud be avoided)
+ * Car_right (if the car to the right is close abd right turn should be avoided)
+Firstly the lane of the car is calculated based on the d frenet coordinate.(lines 227 to 229), the speed of the car is calculated (lines 292 to 295), then the S position of the car is checked for kess then 30 m.(lines 298 to 309)  
+
+### Behavior Planning [line 313 to line 340](./src/main.cpp#L313)
+
+Finally the code to actualy decide the behavior of the veicle is developed to check for different scenarios and make a decision. If the car is infront of us and blocking the ego car , the car car decides whether a right or a left lane change is safe or else it remains in the same lane and reduce the speed unless its safe to change the lane(lines 321 to 330). 
+In case of no car blocking the speed of the car is maintained on the speed limit and the lane is maintained in the original lane 0.(lines 331 to 340) 
+
+
+
+ 
+
+
+
+
+  
+
+
+
 
