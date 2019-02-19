@@ -1,7 +1,7 @@
 # CarND-Path-Planning-Project
 Self-Driving Car Engineer Nanodegree Program
 
-![start](images/driving.png)
+![start](images/drive.png)
    
 ## Problem Overview
 The goals of the project are as follows
@@ -90,7 +90,7 @@ the path has processed since last time.
 ## Project Specification
 
 
-##Compilation
+## Compilation
 
 #### The code compiles correctly.
 	
@@ -156,14 +156,16 @@ To maintain continuity we start with the previous path points from the last time
 ### Prediction step [line 265 to line 311](./src/main.cpp#L265)  
 
 After working on the trajectory generator this part of the code was developed to use the sensor fusion data available from the simulator. We go through all the cars in the visinity of the ego car and categorise three aspects of the cars.
- * Car_ahead (if the car is ahead and less the 30m blocking the ego car)
+ * Car_ahead (if the car is ahead and less the 30m, blocking the ego car)
  * Car_left (if the car to the left is close and left turn shoud be avoided)
  * Car_right (if the car to the right is close abd right turn should be avoided)
+
 Firstly the lane of the car is calculated based on the d frenet coordinate.(lines 227 to 229), the speed of the car is calculated (lines 292 to 295), then the S position of the car is checked for kess then 30 m.(lines 298 to 309)  
 
 ### Behavior Planning [line 313 to line 340](./src/main.cpp#L313)
 
 Finally the code to actualy decide the behavior of the veicle is developed to check for different scenarios and make a decision. If the car is infront of us and blocking the ego car , the car car decides whether a right or a left lane change is safe or else it remains in the same lane and reduce the speed unless its safe to change the lane(lines 321 to 330). 
+
 In case of no car blocking the speed of the car is maintained on the speed limit and the lane is maintained in the original lane 0.(lines 331 to 340) 
 
 
